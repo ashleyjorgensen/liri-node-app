@@ -51,8 +51,6 @@ function getTweets() {
 };
 
 //Spotify
-
-
 function getSong(parameter) {
     console.log("test");
     var searchSong;
@@ -61,7 +59,7 @@ function getSong(parameter) {
     } else {
         searchSong = parameter;
     }
-    console.log(`searchSong: ${searchSong}`)
+    console.log(`searchSong: ${searchSong}`);
     spotify.search(
         {
             type: "track",
@@ -72,6 +70,7 @@ function getSong(parameter) {
                 return console.log("Error occurred: " + err);
             }
             var track = data.tracks.items[0];
+            console.log(JSON.stringify(data[0], null, 2));
 
             // console.log(JSON.stringify(track, null, 2))
 
