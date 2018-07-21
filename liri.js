@@ -39,15 +39,18 @@ function getTweets() {
         if (!err) {
             //for loop
             for (i = 0; i < tweets.length; i++) {
+                 //format and print the relevant info to the screen
+                console.log("~~~~~~~~~~LIRI Results~~~~~~~~~~");
                 console.log("tweet: " + tweets[i].text);
                 console.log("created at: " + tweets[i].created_at);
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
             }
         } else {
             console.log(err)
         }
     });
-    // break;
+
 };
 
 //Spotify
@@ -72,7 +75,6 @@ function getSong(parameter) {
             var track = data.tracks.items[0];
             console.log(JSON.stringify(data[0], null, 2));
 
-            // console.log(JSON.stringify(track, null, 2))
 
             //format and print the relevant info to the screen
             console.log("~~~~~~~~~~LIRI Results~~~~~~~~~~");
@@ -90,38 +92,22 @@ function getMovie(parameter) {
     console.log("I love the holiday!");
 
     var searchMovie;
-    console.log("Search Movie before:", parameter)
+    // console.log("Search Movie before:", parameter)
     if (!parameter) {
         searchMovie = "Mr. Nobody";
     } else {
         searchMovie = parameter;
     };
     console.log("Search Movie: ", searchMovie)
-    // var queryurl = "http://www.omdbapi.com/?t" + searchMovie + "&y=&plot=short&apikey=a2fea8ff";
-    // var queryurl =
-    //     "http://www.omdbapi.com/?apikey=trilogy&?t=" + searchMovie + "&y=&plot=short";
-    // console.log(queryurl);
-    // // http://www.omdbapi.com/?apikey=trilogy&?t=" + searchMovie +"&y=&plot=short
-    // request(queryurl, function (err, response, body) {
-    //     if (err && response.statusCode === 200)
-
-    //     console.log("Title: " + JSON.parse(body).Title);
-    //     console.log("Release Year: " + JSON.parse(body).Year);
-    //     console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-    //     console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Rating);
-    //     console.log("Country: " + JSON.parse(body).Country);
-    //     console.log("Language: " + JSON.parse(body).Language);
-    //     console.log("Plot: " + JSON.parse(body).Plot);
-    //     console.log("Actors: " + JSON.parse(body).Actors);
-    // });
-
-    ///new code
+ 
     var urlHit = "http://www.omdbapi.com/?t=" + searchMovie + "&y=&plot=full&tomatoes=true&apikey=trilogy";
 
     request(urlHit, function (error, response, body) {
         if (!error && response.statusCode === 200) {
             var jsonData = JSON.parse(body);
 
+            //format and print the relevant info to the screen
+            console.log("~~~~~~~~~~LIRI Results~~~~~~~~~~");
             console.log("Title: " + jsonData.Title);
             console.log("Year: " + jsonData.Year);
             console.log("Rated: " + jsonData.Rated);
@@ -131,6 +117,7 @@ function getMovie(parameter) {
             console.log("Plot: " + jsonData.Plot);
             console.log("Actors: " + jsonData.Actors);
             console.log("Rotten Tomatoes Rating: " + jsonData.Ratings[1].Value);
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         } else {
             console.log("Oh no!  Something went wrong!!")
         }
@@ -152,13 +139,13 @@ function doWhatItsSays() {
         console.log(output[1]);
         parameter = output[1]
 
-          if (action === "my-tweets"){
+        if (action === "my-tweets") {
             getTweets()
 
         } else if (action === "spotify-this-song") {
             getSong(parameter)
             console.log("test1");
-        }  
+        }
         else if (action === "movie-this") {
             getMovie(parameter)
         };
